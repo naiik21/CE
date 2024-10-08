@@ -1,0 +1,129 @@
+db.users.insert({
+  "_id": ObjectId(),
+  "email": "nicolas.ratia@example.com",
+  "password": "1234",
+  "username": "naik",
+  "birthdate": ISODate("2002-09-23T00:00:00Z"),
+  "gender": "hombre",
+  "country": "España",
+  "postal_code": "08290",
+  "user_type": "premium",  
+  "subscriptions": [
+    {
+      "start_date": ISODate("2023-01-01T00:00:00Z"),
+      "renewal_date": ISODate("2024-01-01T00:00:00Z"),
+      "payment_method": {
+        "type": "credit_card",
+        "details": {
+          "card_number": "1234-5678-9876-5432",
+          "expiry_month": "12",
+          "expiry_year": "2025",
+          "security_code": "123"
+        }
+      },
+      "payments": [
+        {
+          "payment_date": ISODate("2023-01-01T00:00:00Z"),
+          "order_number": "123456",
+          "total": 9.99
+        }
+      ]
+    }
+  ],
+  "favorite_albums": [
+    {
+      "album_id": ObjectId(),
+      "added_at": ISODate("2023-01-15T00:00:00Z")
+    }
+  ],
+  "favorite_songs": [
+    {
+      "song_id": ObjectId(),
+      "added_at": ISODate("2023-01-20T00:00:00Z")
+    }
+  ],
+  "following_artists": [
+    {
+      "artist_id": ObjectId(),
+      "followed_at": ISODate("2023-01-05T00:00:00Z")
+    }
+  ]
+}
+)
+
+db.playlists.insert({
+  "_id": ObjectId(),
+  "title": "Yeah",
+  "song_count": 2037,
+  "created_at": ISODate("2023-01-01T00:00:00Z"),
+  "deleted_at": null,  
+  "status": "active",  
+  "shared_with": [
+    {
+      "user_id": ObjectId(),
+      "shared_at": ISODate("2023-01-10T00:00:00Z")
+    }
+  ],
+  "songs": [
+    {
+      "song_id": ObjectId(),
+      "added_by": ObjectId(),  // usuario que añadió la canción
+      "added_at": ISODate("2023-01-15T00:00:00Z")
+    }
+  ]
+}
+)
+
+db.songs.insert({
+  "_id": ObjectId(),
+  "title": "Cocotaso",
+  "duration": 240,
+  "play_count": 12300,
+  "album_id": ObjectId(),
+  "added_by": ObjectId(),  // usuario que la añadió a una playlist
+  "added_at": ISODate("2023-01-01T00:00:00Z")
+}
+)
+
+db.albums.insert({
+  "_id": ObjectId(),
+  "title": "Me muevo con dios",
+  "release_year": 2023,
+  "cover_image": "imagen_portada.jpg",
+  "artist_id": ObjectId(),
+  "songs": [
+    {
+      "song_id": ObjectId()
+    }
+  ]
+}
+)
+
+db.artists.insert({
+  "_id": ObjectId(),
+  "name": "Duki",
+  "artist_image": "imagen_artista.jpg",
+  "related_artists": [
+    {
+      "artist_id": ObjectId(),
+      "added_at": ISODate("2023-01-10T00:00:00Z")
+    }
+  ],
+  "albums": [
+    {
+      "album_id": ObjectId(),
+      "released_at": ISODate("2023-01-01T00:00:00Z")
+    }
+  ]
+}
+)
+
+db.payments.insert({
+  "_id": ObjectId(),
+  "user_id": ObjectId(),
+  "payment_date": ISODate("2023-01-01T00:00:00Z"),
+  "order_number": "123456",
+  "total": 9.99
+}
+)
+

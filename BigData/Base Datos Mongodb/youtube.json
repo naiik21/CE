@@ -1,0 +1,162 @@
+db.users.insert({
+  "_id": ObjectId(),
+  "email": "nicolas.ratia@gmail.com",
+  "password": "1234",
+  "username": "naik",
+  "birthdate": ISODate("1990-01-01T00:00:00Z"),
+  "gender": "Hombre",
+  "country": "España",
+  "postal_code": "08290",
+  "channels": [
+    {
+      "channel_id": ObjectId(),
+      "name": "Mi Canal",
+      "description": "Este es mi canal",
+      "created_at": ISODate("2023-01-01T00:00:00Z")
+    }
+  ],
+  "subscriptions": [
+    {
+      "channel_id": ObjectId(),
+      "subscribed_at": ISODate("2023-01-15T00:00:00Z")
+    }
+  ],
+  "playlists": [
+    {
+      "playlist_id": ObjectId(),
+      "name": "Mis Videos Favoritos",
+      "created_at": ISODate("2023-01-10T00:00:00Z"),
+      "status": "public"
+    }
+  ],
+  "likes": [
+    {
+      "video_id": ObjectId(),
+      "liked_at": ISODate("2023-01-20T00:00:00Z")
+    }
+  ],
+  "dislikes": [
+    {
+      "video_id": ObjectId(),
+      "disliked_at": ISODate("2023-01-25T00:00:00Z")
+    }
+  ]
+}
+
+)
+
+db.videos.insert({
+  "_id": ObjectId(),
+  "title": "Mi Primer Video",
+  "description": "Esta es una descripción de mi primer video",
+  "size": 1048576,
+  "file_name": "mi_video.mp4",
+  "duration": 300,
+  "thumbnail": "imagen_thumbnail.png",
+  "views": 1000,
+  "likes_count": 100,
+  "dislikes_count": 10,
+  "state": "public",  // public, hidden, private
+  "tags": [
+    {
+      "tag_id": ObjectId(),
+      "tag_name": "tutorial"
+    }
+  ],
+  "published_by": {
+    "user_id": ObjectId(),
+    "published_at": ISODate("2023-01-01T00:00:00Z")
+  },
+  "likes": [
+    {
+      "user_id": ObjectId(),
+      "liked_at": ISODate("2023-01-20T00:00:00Z")
+    }
+  ],
+  "dislikes": [
+    {
+      "user_id": ObjectId(),
+      "disliked_at": ISODate("2023-01-25T00:00:00Z")
+    }
+  ],
+  "comments": [
+    {
+      "comment_id": ObjectId(),
+      "user_id": ObjectId(),
+      "comment_text": "¡Buen video!",
+      "created_at": ISODate("2023-01-01T10:00:00Z"),
+      "likes": [
+        {
+          "user_id": ObjectId(),
+          "liked_at": ISODate("2023-01-01T12:00:00Z")
+        }
+      ],
+      "dislikes": [
+        {
+          "user_id": ObjectId(),
+          "disliked_at": ISODate("2023-01-01T13:00:00Z")
+        }
+      ]
+    }
+  ]
+}
+)
+
+db.tags.insert({
+  "_id": ObjectId(),
+  "name": "tutorial"
+}
+)
+
+db.playlists({
+  "_id": ObjectId(),
+  "name": "Mis Videos Favoritos",
+  "created_at": ISODate("2023-01-10T00:00:00Z"),
+  "status": "public", // public o private
+  "videos": [
+    {
+      "video_id": ObjectId(),
+      "added_at": ISODate("2023-01-11T00:00:00Z")
+    }
+  ]
+}
+)
+
+db.channels.insert({
+  "_id": ObjectId(),
+  "name": "Mi Canal",
+  "description": "Este es mi canal",
+  "created_at": ISODate("2023-01-01T00:00:00Z"),
+  "owner": {
+    "user_id": ObjectId(),
+    "created_at": ISODate("2023-01-01T00:00:00Z")
+  },
+  "subscribers": [
+    {
+      "user_id": ObjectId(),
+      "subscribed_at": ISODate("2023-01-15T00:00:00Z")
+    }
+  ]
+}
+)
+
+db.comments.insert({
+  "_id": ObjectId(),
+  "video_id": ObjectId(),
+  "user_id": ObjectId(),
+  "comment_text": "¡Buen video!",
+  "created_at": ISODate("2023-01-01T10:00:00Z"),
+  "likes": [
+    {
+      "user_id": ObjectId(),
+      "liked_at": ISODate("2023-01-01T12:00:00Z")
+    }
+  ],
+  "dislikes": [
+    {
+      "user_id": ObjectId(),
+      "disliked_at": ISODate("2023-01-01T13:00:00Z")
+    }
+  ]
+}
+)
