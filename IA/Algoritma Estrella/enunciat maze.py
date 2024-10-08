@@ -42,6 +42,31 @@ def aStar(m:maze):
                     distancia_recorrida[nextPos] = recorrido_auxiliar
                     forwardPath[nextPos] = current
                     open.put((distancia_recorrida[nextPos]+distance(nextPos, end) , nextPos))
+            elif m.maze_map[current][direccion] == 0:
+                match direccion:
+                    case 'E':
+                        nextPos=(current[0],current[1]+1)
+                        if nextPos[1]>COLS:
+                            nextPos=(current[0],COLS)
+                    case 'W':
+                        nextPos=(current[0],current[1]-1)
+                        if nextPos[1]<=0:
+                            nextPos=(current[0],1)
+                    case 'N':
+                        nextPos=(current[0]-1,current[1])
+                        if nextPos[0]<=0:
+                            nextPos=(1,current[1])
+                    case 'S':
+                        nextPos=(current[0]+1,current[1])
+                        if nextPos[0]>ROWS:
+                            nextPos=(ROWS, current[1])
+                print(nextPos)
+                recorrido_auxiliar = distancia_recorrida[current] +5
+                if distancia_recorrida[nextPos] > recorrido_auxiliar:
+                    distancia_recorrida[nextPos] = recorrido_auxiliar
+                    forwardPath[nextPos] = current
+                    open.put((distancia_recorrida[nextPos]+distance(nextPos, end) , nextPos))
+                
     return forwardPath
             
 
@@ -59,5 +84,5 @@ path = aStar(m)
 #post_Astar = time.time()
 #print(post_Astar - pre_Astar)
 a=maze.agent(m,footprints=True)
-m.tracePath({a:path},delay=5)  
+m.tracePath({a:path},delay=300)  
 m.run()
