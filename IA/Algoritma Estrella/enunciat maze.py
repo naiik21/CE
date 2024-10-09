@@ -11,14 +11,17 @@ def distance(cell1, cell2):
     
 
 def aStar(m:maze):
+    #Variables
     start=(1,1)
     end=(ROWS, COLS)
     forwardPath={}
     distancia_recorrida={cell:float("inf") for cell in m.grid}
     distancia_recorrida[start]=0
     
+    #Crear e inicializar PriorityQueue
     open=PriorityQueue()
     open.put((0+distance(start,end),start))
+    
     
     while not open.empty():
         current=open.get()[1]
@@ -26,7 +29,7 @@ def aStar(m:maze):
             break
         
         for direccion in "SNEW":
-            #print(m.maze_map[current][direccion])
+            #Busca el camino 
             if m.maze_map[current][direccion] == 1:
                 match direccion:
                     case 'E':
@@ -38,11 +41,14 @@ def aStar(m:maze):
                     case 'S':
                         nextPos=(current[0]+1,current[1])
                 recorrido_auxiliar = distancia_recorrida[current] + 1 
+                #Mejor recorrido
                 if distancia_recorrida[nextPos] > recorrido_auxiliar:
                     distancia_recorrida[nextPos] = recorrido_auxiliar
                     forwardPath[nextPos] = current
                     open.put((distancia_recorrida[nextPos]+distance(nextPos, end) , nextPos))
-            elif m.maze_map[current][direccion] == 0:
+                    
+            #en caso de poder atravesar una pared a cambio de 5     
+            elif m.maze_map[current][direccion] == 0: 
                 match direccion:
                     case 'E':
                         nextPos=(current[0],current[1]+1)
@@ -60,8 +66,8 @@ def aStar(m:maze):
                         nextPos=(current[0]+1,current[1])
                         if nextPos[0]>ROWS:
                             nextPos=(ROWS, current[1])
-                print(nextPos)
                 recorrido_auxiliar = distancia_recorrida[current] +5
+                #Mejor recorrido
                 if distancia_recorrida[nextPos] > recorrido_auxiliar:
                     distancia_recorrida[nextPos] = recorrido_auxiliar
                     forwardPath[nextPos] = current
@@ -69,9 +75,7 @@ def aStar(m:maze):
                 
     return forwardPath
             
-
-
-                  
+                       
     #print(m.grid)
     #print(labertinto[a.position]) {N / S / E / W}
     #print(labertinto[a.position].get(x)) 0 / 1
